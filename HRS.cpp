@@ -67,7 +67,7 @@ BOOL CHRSApp::InitInstance()
 	// If you are not using these features and wish to reduce the size
 	//  of your final executable, youbb should remove from the following
 	//  the specific initialization routines you do not need.
-    m_BTHand = AfxGetApp()->LoadCursor(IDC_CURSOR_HAND);
+    //m_BTHand = AfxGetApp()->LoadCursor(IDC_CURSOR_HAND);
 
 #ifdef _AFXDLL
 	Enable3dControls();			// Call this when using MFC in a shared DLL

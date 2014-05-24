@@ -54,7 +54,7 @@ void CStaticBox::OnMouseMove(UINT nFlags, CPoint point)
 	// TODO: Add your message handler code here and/or call default
 	//AfxMessageBox("moved mouse!");
 	//this->SetCursor((HCURSOR));
-    ::SetCursor(((CHRSApp*)AfxGetApp())->m_BTHand);
+    //::SetCursor(((CHRSApp*)AfxGetApp())->m_BTHand);
 
 	SetInBitmap();
 
@@ -110,7 +110,7 @@ void CStaticBox::OnStaticCustomer()
 		CString docstr;
 		pt->GetDocString(docstr,CDocTemplate::fileNewName);
 		//this->MessageBox(docstr);
-		if(docstr == "格主")
+		if(docstr == "客户")
 		{
 			POSITION pos =	pt->GetFirstDocPosition();
 			CCUSTOMERDoc *pDoc = NULL;
@@ -389,7 +389,7 @@ void CStaticBox::OnKillFocus(CWnd* pNewWnd)
 
 void CStaticBox::SetInBitmap()
 {
-	if(m_bIsMouseInBox)
+	/*if(m_bIsMouseInBox ||1)
 		return;
 	CBitmap b;
 	switch(bt)
@@ -416,12 +416,12 @@ void CStaticBox::SetInBitmap()
 
 	SetBitmap((HBITMAP)b);
 	b.Detach();
-	m_bIsMouseInBox = true;
+	m_bIsMouseInBox = true;*/
 }
 
 void CStaticBox::SetOutBitmap()
 {
-	if(!m_bIsMouseInBox)
+	/*if(!m_bIsMouseInBox ||1)
 		return;
 	CBitmap b;
 	switch(bt)
@@ -447,5 +447,5 @@ void CStaticBox::SetOutBitmap()
 	}
 	SetBitmap((HBITMAP)b);
 	b.Detach();
-	m_bIsMouseInBox = false;
+	m_bIsMouseInBox = false;*/
 }

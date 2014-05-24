@@ -253,14 +253,14 @@ BOOL CNavView::PreCreateWindow(CREATESTRUCT& cs)
 void CNavView::OnMouseMove(UINT nFlags, CPoint point) 
 {
 	// TODO: Add your message handler code here and/or call default
-    m_cCustomer.SetOutBitmap();
+   /* m_cCustomer.SetOutBitmap();
 	m_cBox.SetOutBitmap();
 	m_cItem.SetOutBitmap();
 	m_cSale.SetOutBitmap();
 	m_cUser.SetOutBitmap();
 	m_cMoney.SetOutBitmap();
 
-	CFormView::OnMouseMove(nFlags, point);
+	CFormView::OnMouseMove(nFlags, point);*/
 }
 
 void CNavView::CenterBoxs(int w, int h)

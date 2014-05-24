@@ -25,7 +25,7 @@ class CHRSApp : public CWinApp
 {
 public:
 	CHRSApp();
-    HCURSOR m_BTHand;
+    //HCURSOR m_BTHand;
 	friend class CQueryView;
 // Overrides
 	// ClassWizard generated virtual function overrides

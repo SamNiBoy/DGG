@@ -108,7 +108,7 @@ void CSaleView::OnInitialUpdate()
 	m_pSet->Close();
 	CListCtrl *pLstBx = (CListCtrl*)GetDlgItem(IDC_LST_SALERECORD);
 	pLstBx->InsertColumn(0, "销售编号");
-	pLstBx->InsertColumn(1, "格子编号");
+	pLstBx->InsertColumn(1, "货位编号");
 	pLstBx->InsertColumn(2, "物品编号");
 	pLstBx->InsertColumn(3, "物品名称");
 	pLstBx->InsertColumn(4, "售价");
@@ -138,7 +138,7 @@ void CSaleView::OnBtnSalequery()
 	boxid.TrimRight();
 	if(boxid.GetLength()<=0)
 	{
-		AfxMessageBox("请输入格子编号！");
+		AfxMessageBox("请输入货位编号！");
 		return;
 	}
 	else
@@ -222,7 +222,7 @@ BOOL CSaleView::CheckRequired()
 	totqty.TrimRight();
 	if(!boxid.GetLength())
 	{
-		AfxMessageBox("请输入格子ID!", MB_OK|MB_ICONERROR);
+		AfxMessageBox("请输入货位ID!", MB_OK|MB_ICONERROR);
 		return FALSE;
 	}
 	if(!itemid.GetLength())
@@ -294,7 +294,7 @@ void CSaleView::OnBtnSaledel()
 		GetDlgItemText(IDC_EDT_SALEITEMID, itemid);
 		GetDlgItemText(IDC_EDT_SALEQTY, bkqty);
 		BOOL putToBox = false;
-		if(AfxMessageBox("物品放回格子？", MB_YESNO|MB_ICONINFORMATION) == IDYES)
+		if(AfxMessageBox("物品放回货位？", MB_YESNO|MB_ICONINFORMATION) == IDYES)
 		{
 			putToBox = true;
 		}
@@ -365,7 +365,7 @@ void CSaleView::OnKillfocusEdtBarcode()
 	int idx = barcod.Find('-');
 	if(idx<0)
 	{
-		AfxMessageBox("条形号码格式不对：“格子编号-物品编号”");
+		AfxMessageBox("条形号码格式不对：“货位编号-物品编号”");
 		return;
 	}
 	boxid = barcod.Left(idx);
@@ -392,7 +392,7 @@ void CSaleView::OnKillfocusEdtBarcode()
 	}*/
 	if(p->IsEOF())
 	{
-		str.Format("条形号码错误，找不到格子：“%s”！", boxid);
+		str.Format("条形号码错误，找不到货位：“%s”！", boxid);
 		AfxMessageBox(str);
 		p->Close();
 		pEdt->SetFocus();
@@ -522,7 +522,7 @@ void CSaleView::ListSaleRecords(CString filter)
 		//AfxMessageBox(txt);
 		//txt = itemid+qty+price;
 		/*pLstBx->InsertColumn(0, "销售编号");
-	      pLstBx->InsertColumn(1, "格子编号");
+	      pLstBx->InsertColumn(1, "货位编号");
 	      pLstBx->InsertColumn(2, "物品编号");
 	      pLstBx->InsertColumn(3, "物品名称");
 	      pLstBx->InsertColumn(4, "数量");
@@ -645,7 +645,7 @@ BOOL CSaleView::SaleOutItem(CString itemid, CString boxid, CString qty)
 		rs.Close();
 		if(atoi(boxqty) < atoi(qty))
 		{
-			AfxMessageBox("格子中物品不够出售!", MB_OK|MB_ICONERROR);
+			AfxMessageBox("货位中物品不够出售!", MB_OK|MB_ICONERROR);
 			return FALSE;
 		}
 		else if(atoi(boxqty) > atoi(qty))
@@ -662,7 +662,7 @@ BOOL CSaleView::SaleOutItem(CString itemid, CString boxid, CString qty)
 	}
 	else
 	{
-			AfxMessageBox("格子中没有该物品!", MB_OK|MB_ICONERROR);
+			AfxMessageBox("货位中没有该物品!", MB_OK|MB_ICONERROR);
 			return FALSE;
 	}
 	return TRUE;
@@ -772,7 +772,7 @@ void CSaleView::OnBtnSaleinfoquery()
 
 
 	pQV->m_sQuerySql = "select s.saleid 销售编号, "
-		               "        s.boxid 格子编号, "
+		               "        s.boxid 货位编号, "
 					   "        s.itemname  物品名称, "
 					   "        s.price  销售价格, "
 					   "        s.totqty 销售数量,"

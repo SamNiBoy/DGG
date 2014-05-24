@@ -55,7 +55,6 @@ protected:  // control bar embedded members
 // Generated message map functions
 protected:
 	//{{AFX_MSG(CMainFrame)
-	afx_msg void OnBtnNavCustomer();
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnMenuLogin();
 	afx_msg void OnSize(UINT nType, int cx, int cy);

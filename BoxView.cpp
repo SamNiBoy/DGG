@@ -241,7 +241,7 @@ BOOL CBoxView::CheckRequired()
     rs.Open(CRecordset::forwardOnly, sql);
 	if(rs.IsOpen() && !rs.IsEOF())
 	{
-		AfxMessageBox("该格子存在未结算租赁，不能修改格主！");
+		AfxMessageBox("该货位存在未结算租赁，不能修改客户！");
 		rs.Close();
 		return false;
 	}
@@ -303,14 +303,14 @@ void CBoxView::OnBtnBoxdel()
 		if(!p->IsEOF())
 		{
 			p->Close();
-			if(AfxMessageBox("格子中存放物品，是否自动清空？", MB_YESNO|MB_ICONINFORMATION) == IDYES)
+			if(AfxMessageBox("货位中存放物品，是否自动清空？", MB_YESNO|MB_ICONINFORMATION) == IDYES)
 			{
 				sql.Format("delete from storage where boxid = '%s'", m_pSet->m_boxid);
 				CDbManger::db.ExecuteSQL(sql);
 			}
 			else
 			{
-				AfxMessageBox("请清空物品后再删除格子！");
+				AfxMessageBox("请清空物品后再删除货位！");
 				return;
 			}
 		}
@@ -321,7 +321,7 @@ void CBoxView::OnBtnBoxdel()
 		if(!p->IsEOF())
 		{
 			p->Close();
-			if(AfxMessageBox("格子存在未结算租赁，是否删除未结算租赁关系？", MB_YESNO|MB_ICONINFORMATION) == IDYES)
+			if(AfxMessageBox("货位存在未结算租赁，是否删除未结算租赁关系？", MB_YESNO|MB_ICONINFORMATION) == IDYES)
 			{
 				sql.Format("delete from rent where boxid = '%s' and payed = 0 ", m_pSet->m_boxid);
 				CDbManger::db.ExecuteSQL(sql);
@@ -357,7 +357,7 @@ void CBoxView::OnBtnBoxlayout()
 
 	if(!boxid.GetLength())
 	{
-		AfxMessageBox("请输入格子编号再摆放！");
+		AfxMessageBox("请输入货位编号再摆放！");
 		return;
 	}
 	CDlgBoxLayout dlg(boxid);
@@ -404,7 +404,7 @@ BOOL CBoxView::BuildSql(CQueryView * pQV)
 		boxid.TrimRight();
 		if(boxid.GetLength()<=0)
 		{
-			AfxMessageBox("请输入当前格子编号!", MB_OK|MB_ICONERROR);
+			AfxMessageBox("请输入当前货位编号!", MB_OK|MB_ICONERROR);
 			return FALSE;
 		}
 		else 
@@ -413,8 +413,8 @@ BOOL CBoxView::BuildSql(CQueryView * pQV)
 
 	if(m_cIncludeRent.GetCheck())
 	{
-		pQV->m_sQuerySql =  "select r.boxid 格子编号, " 
-			                "       r.rentname 格主姓名, r.seqnum 租赁序号, r.price 租赁价格, "
+		pQV->m_sQuerySql =  "select r.boxid 货位编号, " 
+			                "       r.rentname 客户姓名, r.seqnum 租赁序号, r.price 租赁价格, "
 							"       r.totprice 租赁总价, r.payed 结算标志, "
 							"       r.dtefrm 起始日期, "
 							"       r.dteto 终止日期 "
@@ -423,7 +423,7 @@ BOOL CBoxView::BuildSql(CQueryView * pQV)
 							"    on b.ownerid = r.renterid ";
 
 		pQV->m_sFilter = " where 1=1 "+ boxfilter + " order by r.rentname, r.boxid, r.seqnum asc ";
-		pQV->m_sTitle = "格子租赁信息";
+		pQV->m_sTitle = "货位租赁信息";
 		pQV->m_sFootSql = "select "
 			              "       sum(case payed when 1 then 1 else 0 end) 已结笔数, "
 						  "       sum(case payed when 1 then r.totprice else 0 end) 已结算总额, "
@@ -434,8 +434,8 @@ BOOL CBoxView::BuildSql(CQueryView * pQV)
 	}
 	else if(m_cIncludeRentExp.GetCheck())
 	{
-		pQV->m_sQuerySql =  "select r.boxid 格子编号, " 
-			                "       r.rentname 格主姓名, r.seqnum 租赁序号, r.price 租赁价格, "
+		pQV->m_sQuerySql =  "select r.boxid 货位编号, " 
+			                "       r.rentname 客户姓名, r.seqnum 租赁序号, r.price 租赁价格, "
 							"       r.totprice 租赁总价, r.payed 结算标志, "
 							"       r.dtefrm 起始日期, "
 							"       r.dteto 终止日期 "
@@ -454,8 +454,8 @@ BOOL CBoxView::BuildSql(CQueryView * pQV)
 	}
 	else if(m_cIncludeCustomer.GetCheck() && m_cIncludeItem.GetCheck())
 	{
-		pQV->m_sQuerySql =  "select b.boxid 格子编号, " 
-			                "       c.name 格主姓名, b.rentprice 租赁价格, "
+		pQV->m_sQuerySql =  "select b.boxid 货位编号, " 
+			                "       c.name 客户姓名, b.rentprice 租赁价格, "
 							"       s.itemid 物品编号,s.name 物品名称, s.qty 物品数量, s.price 物品价格 "
 							"  from box b "
 							"  left join customer c "
@@ -464,55 +464,55 @@ BOOL CBoxView::BuildSql(CQueryView * pQV)
 							"    on b.boxid = s.boxid ";
 
 		pQV->m_sFilter = " where 1=1 "+ boxfilter;
-		pQV->m_sTitle = "格子综合信息";
+		pQV->m_sTitle = "货位综合信息";
 		pQV->m_sFootSql = "select "
-			              " count(*) 格子总数"
+			              " count(*) 货位总数"
 						  "  from box b ";
 		pQV->m_sFootFilter = " where 1 = 1 "+ boxfilter;
 
 	}
 	else if(m_cIncludeItem.GetCheck())
 	{
-		pQV->m_sQuerySql = "select b.boxid 格子编号, "
+		pQV->m_sQuerySql = "select b.boxid 货位编号, "
 							"      s.itemid 物品编号,s.name 物品名称, s.qty 物品数量, s.price 物品价格 "
 							"  from box b "
 							"  left join storage s "
 							"    on b.boxid = s.boxid ";
 
 		pQV->m_sFilter = " where 1 = 1 "+ boxfilter;
-		pQV->m_sTitle = "格子中物品信息";
+		pQV->m_sTitle = "货位中物品信息";
 		pQV->m_sFootSql = "select "
-			              " count(*) 格子总数"
+			              " count(*) 货位总数"
 						  "  from box b ";
 		pQV->m_sFootFilter = " where 1 = 1 "+ boxfilter;
 
 	}
 	else if(m_cIncludeCustomer.GetCheck())
 	{
-		pQV->m_sQuerySql =  "select b.boxid 格子编号, " 
-			                "      c.name 格主姓名, b.rentprice 租赁价格 "
+		pQV->m_sQuerySql =  "select b.boxid 货位编号, " 
+			                "      c.name 客户姓名, b.rentprice 租赁价格 "
 							"  from box b "
 							"  left join customer c "
 							"    on b.ownerid = c.customerid ";
 
 		pQV->m_sFilter = " where 1 = 1 " + boxfilter;
-		pQV->m_sTitle = "格子租赁信息";
+		pQV->m_sTitle = "货位租赁信息";
 		pQV->m_sFootSql = "select "
-			              " count(*) 格子总数"
+			              " count(*) 货位总数"
 						  "  from box b ";
 		pQV->m_sFootFilter = " where 1 = 1 "+ boxfilter;
 
 	}
 	else
 	{
-		pQV->m_sQuerySql = "select b.boxid 格子编号, " 
+		pQV->m_sQuerySql = "select b.boxid 货位编号, " 
 			                "      b.rentprice 租赁价格 "
 							"  from box b";
 
 		pQV->m_sFilter = " where 1 = 1 "+ boxfilter;
-		pQV->m_sTitle = "格子基本信息";
+		pQV->m_sTitle = "货位基本信息";
 		pQV->m_sFootSql = "select "
-			              " count(*) 格子总数"
+			              " count(*) 货位总数"
 						  "  from box b ";
 		pQV->m_sFootFilter = " where 1 = 1 "+ boxfilter;
 
@@ -554,7 +554,7 @@ void CBoxView::OnKillfocusEdtBoxownerid()
 	}
 	else
 	{
-		AfxMessageBox("不存在该格主！");
+		AfxMessageBox("不存在该客户！");
 		return;
 	} 
 	CString rentprice;
@@ -622,7 +622,7 @@ void CBoxView::OnBtnBoxrentadd()
 
 	if(rs.IsOpen() && !rs.IsEOF())
 	{
-		AfxMessageBox("该格子存在末结算租赁，不能添加新的租赁！");
+		AfxMessageBox("该货位存在末结算租赁，不能添加新的租赁！");
 		return;
 	}
 	OnBtnBoxmodify();
@@ -939,12 +939,12 @@ BOOL CBoxView::CheckRentRequired()
 	price.TrimRight();
 	if(!m_pSet->IsOpen() || m_pSet->m_boxid.GetLength()<=0)
 	{
-        AfxMessageBox("请先查询格子信息！");
+        AfxMessageBox("请先查询货位信息！");
 		return FALSE;		
 	}
 	if(renter.GetLength()<=0)
 	{
-		AfxMessageBox("格主姓名必输！");
+		AfxMessageBox("客户姓名必输！");
 		return FALSE;
 	}
 	if(atof(price)<=0)
@@ -961,7 +961,7 @@ BOOL CBoxView::CheckRentRequired()
     rs.Open(CRecordset::forwardOnly, sql);
 	if(rs.IsOpen() && !rs.IsEOF())
 	{
-		AfxMessageBox("该格子存在未结算租赁，不能修改格主！");
+		AfxMessageBox("该货位存在未结算租赁，不能修改客户！");
 		rs.Close();
 		return false;
 	}

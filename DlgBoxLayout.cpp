@@ -187,7 +187,7 @@ void CDlgBoxLayout::OnBtnLayoutPuttobox()
 			double dprice = atof(price);
 			if(fabs(dprice-m_price)>0.01)
 			{
-				if(AfxMessageBox("设定价格与格子中物品价格不一致，继续？", MB_YESNO|MB_ICONINFORMATION) == IDNO)
+				if(AfxMessageBox("设定价格与货位中物品价格不一致，继续？", MB_YESNO|MB_ICONINFORMATION) == IDNO)
 					return;
 			}
 
@@ -472,11 +472,11 @@ void CDlgBoxLayout::OnBtnLayoutClearbox()
 	GetDlgItemText(IDC_EDT_LAYOUT_BOXITEMQTY, qty);
 	if(atoi(qty)<=0)
 	{
-		AfxMessageBox("格子中没有任何物品!", MB_OK|MB_ICONINFORMATION);
+		AfxMessageBox("货位中没有任何物品!", MB_OK|MB_ICONINFORMATION);
 		return;
 	}
 
-	if(AfxMessageBox("确认清空格子中所有物品？", MB_YESNO|MB_ICONEXCLAMATION) == IDYES)
+	if(AfxMessageBox("确认清空货位中所有物品？", MB_YESNO|MB_ICONEXCLAMATION) == IDYES)
 	{
 
 		long rtcod=AfxMessageBox("放回库存？", MB_YESNOCANCEL|MB_ICONEXCLAMATION);

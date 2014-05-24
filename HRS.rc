@@ -224,9 +224,9 @@ BEGIN
     LTEXT           "姓名：",IDC_STATIC,17,82,25,8
     LTEXT           "年龄：",IDC_STATIC,17,102,25,8
     LTEXT           "性别：",IDC_STATIC,17,123,25,8
-    GROUPBOX        "查找格主",IDC_STATIC,7,7,289,33
+    GROUPBOX        "查找客户",IDC_STATIC,7,7,289,33
     LTEXT           "姓名:",IDC_STATIC,19,24,21,8
-    GROUPBOX        "格主信息",IDC_STATIC,7,44,289,326
+    GROUPBOX        "客户信息",IDC_STATIC,7,44,289,326
     LTEXT           "电话：",IDC_STATIC,17,146,25,8
     LTEXT           "邮件：",IDC_STATIC,17,169,25,8
     LTEXT           "地址：",IDC_STATIC,17,209,25,8
@@ -244,7 +244,7 @@ BEGIN
     PUSHBUTTON      "查询",IDC_BTN_CUSTOMER_QUERY,171,390,113,58
     CONTROL         "用户信息",IDC_CHK_CUSTOMER_CUSTOMER,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,34,423,56,16
-    CONTROL         "格子信息",IDC_CHK_CUSTOMER_BOX,"Button",BS_AUTOCHECKBOX | 
+    CONTROL         "货位信息",IDC_CHK_CUSTOMER_BOX,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,94,402,56,16
     CONTROL         "物品信息",IDC_CHK_CUSTOMER_ITEM,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,94,423,56,16
@@ -270,7 +270,7 @@ STYLE WS_CHILD | WS_CLIPSIBLINGS
 EXSTYLE WS_EX_NOPARENTNOTIFY
 FONT 10, "System", 0, 0, 0x1
 BEGIN
-    CONTROL         144,IDC_STATIC_CUSTOMER,"Static",SS_BITMAP | SS_NOTIFY | 
+    CONTROL         150,IDC_STATIC_CUSTOMER,"Static",SS_BITMAP | SS_NOTIFY | 
                     SS_CENTERIMAGE | WS_BORDER,92,50,48,43,
                     WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
                     WS_EX_STATICEDGE
@@ -297,7 +297,7 @@ STYLE DS_MODALFRAME | WS_CHILD | WS_CLIPSIBLINGS | WS_CAPTION | WS_VSCROLL |
 FONT 9, "宋体"
 BEGIN
     EDITTEXT        IDC_EDT_BOXID,59,22,146,13,ES_AUTOHSCROLL
-    PUSHBUTTON      "查询格子",IDC_BTN_BOXQUERY,212,19,78,16
+    PUSHBUTTON      "查询货位",IDC_BTN_BOXQUERY,212,19,78,16
     EDITTEXT        IDC_EDT_BOXOWNERID,59,40,146,13,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_BOXPRICE,59,58,146,13,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_BOXDESCRIPTION,59,77,146,43,ES_AUTOHSCROLL
@@ -324,24 +324,24 @@ BEGIN
     PUSHBUTTON      "修改信息",IDC_BTN_BOXRENTMODIFY,113,317,78,16
     PUSHBUTTON      "删除租赁",IDC_BTN_BOXRENTDEL,199,317,78,16
     PUSHBUTTON      "结算",IDC_BTN_BOXRENTOVER,209,272,78,32
-    CONTROL         "当前格子",IDC_CHK_CURBOX,"Button",BS_AUTOCHECKBOX | 
+    CONTROL         "当前货位",IDC_CHK_CURBOX,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,33,374,56,16
     CONTROL         "所有租赁",IDC_CHK_BOX_RENT,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,92,374,56,16
-    CONTROL         "格主信息",IDC_CHK_BOX_CUSTOMER,"Button",BS_AUTOCHECKBOX | 
+    CONTROL         "客户信息",IDC_CHK_BOX_CUSTOMER,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,33,395,56,16
     CONTROL         "物品信息",IDC_CHK_BOX_ITEM,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,33,414,56,16
     PUSHBUTTON      "查询",IDC_BTN_BOX_QUERY,171,362,113,58
-    GROUPBOX        "格子信息",IDC_STATIC,7,7,289,143
-    LTEXT           "格子编号：",IDC_STATIC,16,23,41,10
-    LTEXT           "格主编号：",IDC_STATIC,16,41,41,10
+    GROUPBOX        "货位信息",IDC_STATIC,7,7,289,143
+    LTEXT           "货位编号：",IDC_STATIC,16,23,41,10
+    LTEXT           "客户编号：",IDC_STATIC,16,41,41,10
     LTEXT           "租赁价格：",IDC_STATIC,16,59,41,10
     LTEXT           "备注信息：",IDC_STATIC,16,78,41,10
     GROUPBOX        "信息查询",IDC_STATIC,7,344,288,107
     GROUPBOX        "包含",IDC_STATIC,18,358,149,78
     GROUPBOX        "租赁信息",IDC_STATIC,7,152,289,188
-    LTEXT           "格主姓名：",IDC_STATIC,16,165,41,10
+    LTEXT           "客户姓名：",IDC_STATIC,16,165,41,10
     LTEXT           "租赁价格：",IDC_STATIC,16,182,41,10
     LTEXT           "备注信息：",IDC_STATIC,16,268,41,10
     LTEXT           "租期开始：",IDC_STATIC,16,216,41,10
@@ -350,7 +350,7 @@ BEGIN
     LTEXT           "租赁次数：",IDC_STATIC,15,251,41,10
     CONTROL         "过期租赁",IDC_CHK_BOX_RENTEXP,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,92,395,56,16
-    PUSHBUTTON      "查询格主",IDC_BTN_BOXOWNERQUERY,211,38,78,16
+    PUSHBUTTON      "查询客户",IDC_BTN_BOXOWNERQUERY,211,38,78,16
 END
 
 IDD_ITEM_FORM DIALOG DISCARDABLE  0, 0, 444, 486
@@ -406,7 +406,7 @@ FONT 9, "宋体"
 BEGIN
     EDITTEXT        IDC_EDT_BARCODE,60,25,146,13,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_SALEBOXID,59,64,146,13,ES_AUTOHSCROLL
-    PUSHBUTTON      "按格子查询物品",IDC_BTN_SALEBOXQUERY,210,63,64,16
+    PUSHBUTTON      "按货位查询物品",IDC_BTN_SALEBOXQUERY,210,63,64,16
     EDITTEXT        IDC_EDT_SALEITEMID,59,82,146,13,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_SALEPRICE,59,118,146,13,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_SALEQTY,59,137,146,13,ES_AUTOHSCROLL
@@ -421,7 +421,7 @@ BEGIN
     PUSHBUTTON      "清空记录信息",IDC_BTN_SALECLEAR,210,162,65,16
     EDITTEXT        IDC_EDT_SALEID,60,45,146,13,ES_AUTOHSCROLL
     GROUPBOX        "记录信息",IDC_STATIC,7,7,369,272
-    LTEXT           "格子编号：",IDC_STATIC,15,65,41,8
+    LTEXT           "货位编号：",IDC_STATIC,15,65,41,8
     LTEXT           "物品编号：",IDC_STATIC,15,83,41,8
     LTEXT           "物品总价：",IDC_STATIC,15,156,41,8
     LTEXT           "备注信息：",IDC_STATIC,15,195,41,8
@@ -432,7 +432,7 @@ BEGIN
     LTEXT           "条形号码：",IDC_STATIC,15,25,41,8
     EDITTEXT        IDC_EDT_SALEITEMNAME,59,99,146,13,ES_AUTOHSCROLL
     LTEXT           "物品名称：",IDC_STATIC,15,101,41,8
-    PUSHBUTTON      "按物品查询格子",IDC_BTN_SALEITEMQUERY,210,100,63,16
+    PUSHBUTTON      "按物品查询货位",IDC_BTN_SALEITEMQUERY,210,100,63,16
     GROUPBOX        "当日销售记录",IDC_STATIC,7,286,541,172
     CONTROL         "List1",IDC_LST_SALERECORD,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,7,294,540,163
@@ -440,7 +440,7 @@ BEGIN
     GROUPBOX        "销售查询",IDC_STATIC,7,464,292,114
     EDITTEXT        IDC_EDT_SALEBOXIDQUERY,63,481,146,13,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_SALEITEMIDQUERY,63,499,146,13,ES_AUTOHSCROLL
-    LTEXT           "格子编号：",IDC_STATIC,19,483,41,8
+    LTEXT           "货位编号：",IDC_STATIC,19,483,41,8
     LTEXT           "物品编号：",IDC_STATIC,19,501,41,8
     CONTROL         "DateTimePicker1",IDC_DATETIMEPICKER_SALEDATEFROM,
                     "SysDateTimePick32",DTS_RIGHTALIGN | DTS_LONGDATEFORMAT | 
@@ -497,16 +497,16 @@ BEGIN
                     ES_READONLY
     EDITTEXT        IDC_EDT_LAYOUT_BOXTOTPRICE,58,294,146,13,ES_AUTOHSCROLL | 
                     ES_READONLY
-    GROUPBOX        "格子信息",IDC_STATIC,7,245,289,205
-    LTEXT           "格子编号：",IDC_STATIC,16,259,41,10
+    GROUPBOX        "货位信息",IDC_STATIC,7,245,289,205
+    LTEXT           "货位编号：",IDC_STATIC,16,259,41,10
     LTEXT           "物品总数：",IDC_STATIC,16,277,41,10
     LTEXT           "物品总价：",IDC_STATIC,16,295,41,10
-    PUSHBUTTON      "放入格子",IDC_BTN_LAYOUT_PUTTOBOX,211,80,78,82
+    PUSHBUTTON      "放入货位",IDC_BTN_LAYOUT_PUTTOBOX,211,80,78,82
     PUSHBUTTON      "摆放完毕",IDOK,316,375,95,40
     CONTROL         "List1",IDC_LST_LAYOUT_BOXITEM,"SysListView32",
                     LVS_REPORT | LVS_SINGLESEL | LVS_SORTASCENDING | 
                     WS_BORDER | WS_TABSTOP,7,318,289,132
-    PUSHBUTTON      "清空格子",IDC_BTN_LAYOUT_CLEARBOX,211,255,78,59
+    PUSHBUTTON      "清空货位",IDC_BTN_LAYOUT_CLEARBOX,211,255,78,59
 END
 
 IDD_DLG_FIND DIALOG DISCARDABLE  0, 0, 207, 198
@@ -753,12 +753,6 @@ IDB_SALE                BITMAP  DISCARDABLE     "res\\customer.bmp"
 IDB_USER                BITMAP  DISCARDABLE     "res\\bmp00001.bmp"
 IDB_MONEY               BITMAP  DISCARDABLE     "res\\bmp00002.bmp"
 IDB_CUSTOMER            BITMAP  DISCARDABLE     "res\\bmp00003.bmp"
-IDB_CUSTOMER_IN         BITMAP  DISCARDABLE     "res\\customer3.bmp"
-IDB_BOX_IN              BITMAP  DISCARDABLE     "res\\bitmap1.bmp"
-IDB_ITEM_IN             BITMAP  DISCARDABLE     "res\\item2.bmp"
-IDB_MONEY_IN            BITMAP  DISCARDABLE     "res\\money1.bmp"
-IDB_SALE_IN             BITMAP  DISCARDABLE     "res\\sale1.bmp"
-IDB_USER_IN             BITMAP  DISCARDABLE     "res\\user2..bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -808,8 +802,8 @@ END
 STRINGTABLE PRELOAD DISCARDABLE 
 BEGIN
     IDR_MAINFRAME           "物流管理系统"
-    IDR_CUSTOMERTYPE        "\n格主\n格主\n\n\nCUSTOMER.Document\nCUSTOMER 文档"
-    IDR_BOXTYPE             "\n格子\nBOX\n\n\nBOX.Document\n格子文档"
+    IDR_CUSTOMERTYPE        "\n客户\n客户\n\n\nCUSTOMER.Document\nCUSTOMER 文档"
+    IDR_BOXTYPE             "\n货位\nBOX\n\n\nBOX.Document\n货位文档"
     IDR_ITEMTYPE            "\nItem\nITEM\n\n\nITEM.Document\n物品文档"
     IDR_SALETYPE            "\n销售\nSALE\n\n\nSALE.Document\n销售文档"
     IDR_USERTYPE            "\n用户\nUSER\n\n\nUSER.Document\n用户文档"
@@ -818,7 +812,7 @@ END
 
 STRINGTABLE PRELOAD DISCARDABLE 
 BEGIN
-    AFX_IDS_APP_TITLE       "大格格店铺管理"
+    AFX_IDS_APP_TITLE       "物流管理"
     AFX_IDS_IDLEMESSAGE     "欢迎使用"
 END
 

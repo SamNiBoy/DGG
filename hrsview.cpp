@@ -226,7 +226,7 @@ void CCUSTOMERView::OnBtnDel()
 	}
 	else
 	{
-		if(AfxMessageBox("确认删除该格主？",MB_YESNO|MB_ICONEXCLAMATION) == IDYES)
+		if(AfxMessageBox("确认删除该客户？",MB_YESNO|MB_ICONEXCLAMATION) == IDYES)
 		{
 	        m_pSet->Delete();
 		    OnBtnClear();
@@ -493,7 +493,7 @@ BOOL CCUSTOMERView::BuildSql(CQueryView *pQV)
 		cusid.TrimRight();
 		if(cusid.GetLength()<=0)
 		{
-			AfxMessageBox("请输入当前格主编号!", MB_OK|MB_ICONERROR);
+			AfxMessageBox("请输入当前客户编号!", MB_OK|MB_ICONERROR);
 			return FALSE;
 		}
 		else 
@@ -503,8 +503,8 @@ BOOL CCUSTOMERView::BuildSql(CQueryView *pQV)
 
 	if(m_cIncludeBox.GetCheck() && m_cIncludeItem.GetCheck())
 	{
-		pQV->m_sQuerySql =  "select c.customerid 格主编号, " 
-			                "       c.name 格主姓名, b.boxid 格子编号, b.rentprice 租赁价格, "
+		pQV->m_sQuerySql =  "select c.customerid 客户编号, " 
+			                "       c.name 客户姓名, b.boxid 货位编号, b.rentprice 租赁价格, "
 							"       i.itemid 物品编号,i.name 物品名称, i.qty 物品数量, i.price 物品价格, i.discnt 销售折扣 "
 							"  from customer c "
 							"  left join box b "
@@ -513,39 +513,39 @@ BOOL CCUSTOMERView::BuildSql(CQueryView *pQV)
 							"    on c.customerid = i.ownerid ";
 
 		pQV->m_sFilter = " where 1=1 "+ customerfilter;
-		pQV->m_sTitle = "格主综合信息";
+		pQV->m_sTitle = "客户综合信息";
 	}
 	else if(m_cIncludeItem.GetCheck())
 	{
-		pQV->m_sQuerySql = "select c.customerid 格主编号, c.name 格主姓名,"
+		pQV->m_sQuerySql = "select c.customerid 客户编号, c.name 客户姓名,"
 							"      i.itemid 物品编号,i.name 物品名称, i.qty 物品数量, i.price 物品价格 "
 							"  from customer c "
 							"  left join item i "
 							"    on c.customerid = i.ownerid ";
 
 		pQV->m_sFilter = " where 1 = 1 "+ customerfilter;
-		pQV->m_sTitle = "格主物品信息";
+		pQV->m_sTitle = "客户物品信息";
 	}
 	else if(m_cIncludeBox.GetCheck())
 	{
-		pQV->m_sQuerySql =  "select c.name 格主姓名, b.boxid 格子编号, " 
+		pQV->m_sQuerySql =  "select c.name 客户姓名, b.boxid 货位编号, " 
 			                "      b.rentprice 租赁价格 "
 							"  from customer c "
 							"  left join box b "
 							"    on b.ownerid = c.customerid ";
 
 		pQV->m_sFilter = " where 1 = 1 " + customerfilter;
-		pQV->m_sTitle = "格主租赁信息";
+		pQV->m_sTitle = "客户租赁信息";
 	}
 	else
 	{
-		pQV->m_sQuerySql = "select c.customerid 格主编号, " 
-			                "      c.name 格主姓名, "
-							"      c.tel 格主电话 "
+		pQV->m_sQuerySql = "select c.customerid 客户编号, " 
+			                "      c.name 客户姓名, "
+							"      c.tel 客户电话 "
 							"  from customer c";
 
 		pQV->m_sFilter = " where 1 = 1 "+ customerfilter;
-		pQV->m_sTitle = "格主基本信息";
+		pQV->m_sTitle = "客户基本信息";
 	}
         pQV->m_sFootSql = "select count(*) 客户数 from customer c ";
 		pQV->m_sFootFilter = " where 1=1 " + customerfilter;	
